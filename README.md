@@ -22,4 +22,3 @@ The objective is to transform raw financial data into meaningful insights throug
 - **pandas** and **numpy** for data processing
 - **matplotlib** and **seaborn** for visualization
 - **Streamlit** for the interactive dashboard
-- **Statistical methods** including volatility, Sharpe ratio, and correlation
