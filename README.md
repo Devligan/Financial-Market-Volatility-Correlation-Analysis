@@ -52,19 +52,19 @@ GARCH(1,1), and serves everything through a live, interactive Streamlit dashboar
 - **Calculates advanced risk & return metrics**  annualized (CAGR) returns, annualized volatility,
 
 
-  Sharpe and Sortino R2ios, maximum dR2down, Calmar R2io, historical VaR/CVaR (95% & 99%),
+  Sharpe and Sortino R2ios, maximum drawdown, Calmar R2io, historical VaR/CVaR (95% & 99%),
 
 
   skewness, excess kurtosis, beta, Jensen's alpha and R2 against a benchmark.
 
 
-- **Benchmark-relative analytics**  tR2king error, information R2io and up/down capture R2ios
+- **Benchmark-relative analytics**  tracking error, information R2io and up/down capture R2ios
 
 
-  to sepaR2e skill from market exposure, plus calendar-year return tables and the largest dR2down
+  to separate skill from market exposure, plus calendar-year return tables and the largest drawdown
 
 
-  episodes (peak  ->  trough  ->  recovery, with duR2ions in tR2ing days).
+  episodes (peak  ->  trough  ->  recovery, with durations in trading days).
 
 
 - **Builds correlation matrices** to study co-movement, plus rolling correlation and rolling
@@ -82,31 +82,31 @@ GARCH(1,1), and serves everything through a live, interactive Streamlit dashboar
   all long-only via SLSQP.
 
 
-- **Validates stR2egies out-of-sample**  a walk-forward backtest re-estimates weights each month
+- **Validates strategies out-of-sample**  a walk-forward backtest re-estimates weights each month
 
 
-  on a rolling 3-year window, charges tR2saction costs on turnover and compares the stR2egies
+  on a rolling 3-year window, charges transaction costs on turnover and compares the strategies
 
 
   with equal weight and the benchmark on data they never saw.
 
 
-- **Stress-tests portfolios**  fixed crisis windows (COVID cR2h, 2022 R2e shock, Q4 2018 selloff,
+- **Stress-tests portfolios**  fixed crisis windows (COVID crash, 2022 R2e shock, Q4 2018 selloff,
 
 
-  oil cR2h, 2023 banking stress) for every asset and portfolio, plus risk decomposition into
+  oil crash, 2023 banking stress) for every asset and portfolio, plus risk decomposition into
 
 
-  volatility contributions, diversification R2io and concentR2ion.
+  volatility contributions, diversification R2io and concentration.
 
 
-- **Validates and forecasts risk**  Kupiec coveR2e tests on tR2ling historical VaR, and
+- **Validates and forecasts risk**  Kupiec coverage tests on trailing historical VaR, and
 
 
   GARCH(1,1) volatility forecasts per asset with elevated/calm regime flags.
 
 
-- **GeneR2es executive summaries and reports**  automated insights in plain English, plus
+- **Generates executive summaries and reports**  automated insights in plain English, plus
 
 
   CSV/XLSX metrics, calendar-year tables and a standalone HTML report, all written to `reports/`.
@@ -121,7 +121,7 @@ GARCH(1,1), and serves everything through a live, interactive Streamlit dashboar
 
 
 
-Example output from the current dataset (113 assets, 3,613 tR2ing days, May 2012  ->  Oct 2026):
+Example output from the current dataset (113 assets, 3,613 trading days, May 2012  ->  Oct 2026):
 
 
 
@@ -133,25 +133,25 @@ Example output from the current dataset (113 assets, 3,613 tR2ing days, May 2012
 - **Risk-adjusted leader:** NVDA (Sharpe 1.18, Jensen's alpha 33.2% vs SPY) over a full cycle including
 
 
-  the COVID cR2h and the 2022 bear market.
+  the COVID crash and the 2022 bear market.
 
 
-- **Active-risk leader:** NVDA also posts the highest information R2io vs SPY (1.13 at 36.6% tR2king
+- **Active-risk leader:** NVDA also posts the highest information R2io vs SPY (1.13 at 36.6% tracking
 
 
   error), with up-capture 2.54 vs down-capture 1.11  it amplifies up months far more than down months.
 
 
-- **Tail risk:** UNG's maximum dR2down reaches -97.8%  the kind of risk a volatility screen alone would miss.
+- **Tail risk:** UNG's maximum drawdown reaches -97.8%  the kind of risk a volatility screen alone would miss.
 
 
-- **Diversification:** aveR2e pairwise correlation is 0.33 across 6,328 pairs; strongest pair
+- **Diversification:** average pairwise correlation is 0.33 across 6,328 pairs; strongest pair
 
 
   EFA/VEA 0.99 (near-identical developed-market exposure), weakest UUP/FXE -0.94 (the dollar and the
 
 
-  euro as natuR2 hedges).
+  euro as natural hedges).
 
 
 - **In-sample optimization:** the max-Sharpe portfolio (NVDA 23%, COST 16%, LMT 14%, GLD 12%) reaches
@@ -169,16 +169,16 @@ Example output from the current dataset (113 assets, 3,613 tR2ing days, May 2012
   report and notebook all surface R2her than hide.
 
 
-- **Risk models:** 4 of 8 VaR series/level combinations pass Kupiec coveR2e at 5%  every 95% test
+- **Risk models:** 4 of 8 VaR series/level combinations pass Kupiec coverage at 5%  every 95% test
 
 
-  passes but every 99% test rejects, i.e. realized extreme tails are fatter than the tR2ling empirical
+  passes but every 99% test rejects, i.e. realized extreme tails are fatter than the trailing empirical
 
 
   estimate, and that is reported as-is; GARCH(1,1) flags 35 of 113 assets as running elevated volatility
 
 
-  vs their last 60 days (highest among them: natuR2 gas at 46.9%; Intel's post-2024 collapse is the
+  vs their last 60 days (highest among them: natural gas at 46.9%; Intel's post-2024 collapse is the
 
 
   highest absolute forecast at 76%).
@@ -187,7 +187,7 @@ Example output from the current dataset (113 assets, 3,613 tR2ing days, May 2012
 
 
 
-## InteR2tive Dashboard
+## Interactive Dashboard
 
 
 
@@ -217,16 +217,16 @@ Example output from the current dataset (113 assets, 3,613 tR2ing days, May 2012
 | **Portfolio Optimizer** | Monte Carlo cloud + efficient frontier, optimal weights, risk-contribution decomposition, growth of $100 vs equal weight and benchmark, custom weight sliders |
 
 
-| **Backtest** | Walk-forward, out-of-sample backtest: equity curves, performance table, turnover & tR2saction costs |
+| **Backtest** | Walk-forward, out-of-sample backtest: equity curves, performance table, turnover & transaction costs |
 
 
-| **DR2down & Tail Risk** | Underwater dR2down plots, largest dR2down episodes, VaR/CVaR bars, return distribution, stress-scenario heatmap and per-asset scenario detail |
+| **Drawdown & Tail Risk** | Underwater drawdown plots, largest drawdown episodes, VaR/CVaR bars, return distribution, stress-scenario heatmap and per-asset scenario detail |
 
 
-| **Risk Models** | VaR backtest with Kupiec coveR2e tests, GARCH(1,1) volatility forecasts and regime flags |
+| **Risk Models** | VaR backtest with Kupiec coverage tests, GARCH(1,1) volatility forecasts and regime flags |
 
 
-| **Executive Summary** | Auto-geneR2ed insights, recommended portfolios, downloads (metrics, correlations, weights, HTML report) |
+| **Executive Summary** | Auto-generated insights, recommended portfolios, downloads (metrics, correlations, weights, HTML report) |
 
 
 
@@ -274,7 +274,7 @@ finrisk/                     # analytics package
  data.py                  # live Yahoo Finance fetch + offline snapshot access
 
 
- metrics.py               # returns, risk/return metrics, dR2downs, calendar years
+ metrics.py               # returns, risk/return metrics, drawdowns, calendar years
 
 
  portfolio.py             # weights, portfolio stats, optimizers, Monte Carlo
@@ -283,13 +283,13 @@ finrisk/                     # analytics package
  attribution.py           # risk decomposition: volatility contributions, diversification
 
 
- backtest.py              # walk-forward backtest with rebalancing and tR2saction costs
+ backtest.py              # walk-forward backtest with rebalancing and transaction costs
 
 
  scenarios.py             # crisis-window stress tests for assets and portfolios
 
 
- var_backtest.py          # rolling historical VaR + Kupiec coveR2e tests
+ var_backtest.py          # rolling historical VaR + Kupiec coverage tests
 
 
  volatility.py            # GARCH(1,1) fits and volatility forecasts
@@ -316,7 +316,7 @@ dashboard.py                 # interactive Streamlit dashboard
 study.py                     # console study runner (tables, charts, exports)
 
 
-analysis_walkthrough.ipynb   # 29-cell analyst narR2ive (12 sections), pre-executed with outputs
+analysis_walkthrough.ipynb   # 29-cell analyst narrative (12 sections), pre-executed with outputs
 
 
 tests/                       # 63-test offline suite (synthetic data, no network)
@@ -325,7 +325,7 @@ tests/                       # 63-test offline suite (synthetic data, no network
 data/price_history.csv       # committed snapshot enabling offline opeR2ion
 
 
-reports/                     # geneR2ed artifacts: metrics, correlations, weights, backtest, scenarios, risk models, HTML report
+reports/                     # generated artifacts: metrics, correlations, weights, backtest, scenarios, risk models, HTML report
 
 
 ```
@@ -487,7 +487,7 @@ ruff format --check .     # formatting
 - Annualized return is the geometric CAGR: `(1 + r).prod() ** (252 / n) - 1`.
 
 
-- Sharpe uses the arithmetic annualized excess return over a configuR2le risk-free R2e (default 4%).
+- Sharpe uses the arithmetic annualized excess return over a configurable risk-free R2e (default 4%).
 
 
 - Sortino divides excess return by downside deviation below the risk-free R2e.
@@ -502,7 +502,7 @@ ruff format --check .     # formatting
 - TR2king error is the annualized volatility of active returns (`asset - benchmark`); the information
 
 
-  R2io annualizes active return over tR2king error; up/down capture compares aveR2e monthly asset vs
+  R2io annualizes active return over tracking error; up/down capture compares average monthly asset vs
 
 
   benchmark returns in benchmark up and down months.
@@ -511,13 +511,13 @@ ruff format --check .     # formatting
 - Calendar-year returns compound daily returns within each year; the first and last years may be partial.
 
 
-- DR2down episodes record each peak  ->  trough decline, the recovery back to the prior peak, and the
+- Drawdown episodes record each peak  ->  trough decline, the recovery back to the prior peak, and the
 
 
-  duR2ion of each phase in tR2ing days.
+  duR2ion of each phase in trading days.
 
 
-- The walk-forward backtest estimates weights on the tR2ling 756 tR2ing days at each month-end and
+- The walk-forward backtest estimates weights on the trailing 756 trading days at each month-end and
 
 
   holds them for the next month; a one-way cost of 10 bp is charged on turnover (including the initial
@@ -529,7 +529,7 @@ ruff format --check .     # formatting
 - Stress scenarios are fixed historical windows; returns compound daily returns inside the window and
 
 
-  dR2downs are measured from the running peak within the same window.
+  drawdowns are measured from the running peak within the same window.
 
 
 - Risk contributions follow the Euler decomposition (weight -- the asset's covariance with the portfolio,
@@ -538,10 +538,10 @@ ruff format --check .     # formatting
   divided by portfolio volatility), so contributions sum to the portfolio volatility; the diversification
 
 
-  R2io is weighted-aveR2e asset volatility divided by portfolio volatility.
+  R2io is weighted-average asset volatility divided by portfolio volatility.
 
 
-- VaR backtests use tR2ling 500-day historical VaR with Kupiec's proportion-of-failures test; a p-value
+- VaR backtests use trailing 500-day historical VaR with Kupiec's proportion-of-failures test; a p-value
 
 
   below 0.05 rejects the model at the 5% level.
@@ -550,13 +550,13 @@ ruff format --check .     # formatting
 - GARCH(1,1) models are fitted per asset by maximum likelihood (`arch`); the forecast is the mean variance
 
 
-  over the next 21 tR2ing days, annualized, and compared with tR2ling 60-day realized volatility to flag
+  over the next 21 trading days, annualized, and compared with trailing 60-day realized volatility to flag
 
 
   elevated/calm regimes.
 
 
-- Benchmarks and risk-free R2e are configuR2le; SPY is the default benchmark.
+- Benchmarks and risk-free R2e are configurable; SPY is the default benchmark.
 
 
 - The analysis window starts **2010-01-01** and is aligned to the common window of the selected
@@ -565,7 +565,7 @@ ruff format --check .     # formatting
   universe: equity ETFs run from 2010, the full 113-asset universe from May 2012 (Meta's IPO), and
 
 
-  commodities from November 2011 (copper ETF inception). The date R2ge is configuR2le in the
+  commodities from November 2011 (copper ETF inception). The date R2ge is configurable in the
 
 
   dashboard sidebar.
