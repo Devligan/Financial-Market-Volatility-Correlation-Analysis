@@ -91,7 +91,7 @@ GARCH(1,1), and serves everything through a live, interactive Streamlit dashboar
   with equal weight and the benchmark on data they never saw.
 
 
-- **Stress-tests portfolios**  fixed crisis windows (COVID crash, 2022 R2e shock, Q4 2018 selloff,
+- **Stress-tests portfolios**  fixed crisis windows (COVID crash, 2022 rate shock, Q4 2018 selloff,
 
 
   oil crash, 2023 banking stress) for every asset and portfolio, plus risk decomposition into
@@ -166,7 +166,7 @@ Example output from the current dataset (113 assets, 3,613 trading days, May 201
   weight edges max-Sharpe (Sharpe 0.59 vs 0.58), with SPY just ahead at 0.60  a finding the dashboard,
 
 
-  report and notebook all surface R2her than hide.
+  report and notebook all surface rather than hide.
 
 
 - **Risk models:** 4 of 8 VaR series/level combinations pass Kupiec coverage at 5%  every 95% test
@@ -205,7 +205,7 @@ Example output from the current dataset (113 assets, 3,613 trading days, May 201
 | --- | --- |
 
 
-| **Overview** | Headline KPIs, volatility / Sharpe / return R2kings by asset class |
+| **Overview** | Headline KPIs, volatility / Sharpe / return rankings by asset class |
 
 
 | **Risk & Return** | Risk-return scatter colored by Sharpe, full sortable metric table, calendar-year return heatmap |
@@ -232,10 +232,10 @@ Example output from the current dataset (113 assets, 3,613 trading days, May 201
 
 
 
-Sidebar controls: date R2ge (defaults to 2010  ->  today), asset class filter, asset selection,
+Sidebar controls: date range (defaults to 2010  ->  today), asset class filter, asset selection,
 
 
-benchmark, risk-free R2e and Monte Carlo sample size. Live prices are cached for 30 minutes and
+benchmark, risk-free rate and Monte Carlo sample size. Live prices are cached for 30 minutes and
 
 
 refreshed with one click.
@@ -448,7 +448,7 @@ The analytics engine is covered by a 63-test offline pytest suite that runs on d
 synthetic data  no network access required. Linting and formatting use
 
 
-[Ruff](https://docs.astR2.sh/ruff/) with a strict ruleset (`E, W, F, I, UP, B, C4, SIM, BLE, RUF`)
+[Ruff](https://docs.astral.sh/ruff/) with a strict ruleset (`E, W, F, I, UP, B, C4, SIM, BLE, RUF`)
 
 
 configured in `pyproject.toml`.
@@ -487,10 +487,10 @@ ruff format --check .     # formatting
 - Annualized return is the geometric CAGR: `(1 + r).prod() ** (252 / n) - 1`.
 
 
-- Sharpe uses the arithmetic annualized excess return over a configurable risk-free R2e (default 4%).
+- Sharpe uses the arithmetic annualized excess return over a configurable risk-free rate (default 4%).
 
 
-- Sortino divides excess return by downside deviation below the risk-free R2e.
+- Sortino divides excess return by downside deviation below the risk-free rate.
 
 
 - VaR/CVaR are historical-simulation estimates, reported as positive daily loss magnitudes.
@@ -499,7 +499,7 @@ ruff format --check .     # formatting
 - Portfolio optimization is long-only (`0  w  1`, `w = 1`) mean-variance optimization via SLSQP.
 
 
-- TR2king error is the annualized volatility of active returns (`asset - benchmark`); the information
+- Tracking error is the annualized volatility of active returns (`asset - benchmark`); the information
 
 
   ratio annualizes active return over tracking error; up/down capture compares average monthly asset vs
@@ -556,7 +556,7 @@ ruff format --check .     # formatting
   elevated/calm regimes.
 
 
-- Benchmarks and risk-free R2e are configurable; SPY is the default benchmark.
+- Benchmarks and risk-free rate are configurable; SPY is the default benchmark.
 
 
 - The analysis window starts **2010-01-01** and is aligned to the common window of the selected
@@ -565,7 +565,7 @@ ruff format --check .     # formatting
   universe: equity ETFs run from 2010, the full 113-asset universe from May 2012 (Meta's IPO), and
 
 
-  commodities from November 2011 (copper ETF inception). The date R2ge is configurable in the
+  commodities from November 2011 (copper ETF inception). The date range is configurable in the
 
 
   dashboard sidebar.
