@@ -52,13 +52,13 @@ GARCH(1,1), and serves everything through a live, interactive Streamlit dashboar
 - **Calculates advanced risk & return metrics**  annualized (CAGR) returns, annualized volatility,
 
 
-  Sharpe and Sortino R2ios, maximum drawdown, Calmar R2io, historical VaR/CVaR (95% & 99%),
+  Sharpe and Sortino ratios, maximum drawdown, Calmar ratio, historical VaR/CVaR (95% & 99%),
 
 
   skewness, excess kurtosis, beta, Jensen's alpha and R2 against a benchmark.
 
 
-- **Benchmark-relative analytics**  tracking error, information R2io and up/down capture R2ios
+- **Benchmark-relative analytics**  tracking error, information ratio and up/down capture ratios
 
 
   to separate skill from market exposure, plus calendar-year return tables and the largest drawdown
@@ -97,7 +97,7 @@ GARCH(1,1), and serves everything through a live, interactive Streamlit dashboar
   oil crash, 2023 banking stress) for every asset and portfolio, plus risk decomposition into
 
 
-  volatility contributions, diversification R2io and concentration.
+  volatility contributions, diversification ratio and concentration.
 
 
 - **Validates and forecasts risk**  Kupiec coverage tests on trailing historical VaR, and
@@ -136,7 +136,7 @@ Example output from the current dataset (113 assets, 3,613 trading days, May 201
   the COVID crash and the 2022 bear market.
 
 
-- **Active-risk leader:** NVDA also posts the highest information R2io vs SPY (1.13 at 36.6% tracking
+- **Active-risk leader:** NVDA also posts the highest information ratio vs SPY (1.13 at 36.6% tracking
 
 
   error), with up-capture 2.54 vs down-capture 1.11  it amplifies up months far more than down months.
@@ -322,7 +322,7 @@ analysis_walkthrough.ipynb   # 29-cell analyst narrative (12 sections), pre-exec
 tests/                       # 63-test offline suite (synthetic data, no network)
 
 
-data/price_history.csv       # committed snapshot enabling offline opeR2ion
+data/price_history.csv       # committed snapshot enabling offline operation
 
 
 reports/                     # generated artifacts: metrics, correlations, weights, backtest, scenarios, risk models, HTML report
@@ -502,7 +502,7 @@ ruff format --check .     # formatting
 - TR2king error is the annualized volatility of active returns (`asset - benchmark`); the information
 
 
-  R2io annualizes active return over tracking error; up/down capture compares average monthly asset vs
+  ratio annualizes active return over tracking error; up/down capture compares average monthly asset vs
 
 
   benchmark returns in benchmark up and down months.
@@ -514,7 +514,7 @@ ruff format --check .     # formatting
 - Drawdown episodes record each peak  ->  trough decline, the recovery back to the prior peak, and the
 
 
-  duR2ion of each phase in trading days.
+  duration of each phase in trading days.
 
 
 - The walk-forward backtest estimates weights on the trailing 756 trading days at each month-end and
@@ -538,7 +538,7 @@ ruff format --check .     # formatting
   divided by portfolio volatility), so contributions sum to the portfolio volatility; the diversification
 
 
-  R2io is weighted-average asset volatility divided by portfolio volatility.
+  ratio is weighted-average asset volatility divided by portfolio volatility.
 
 
 - VaR backtests use trailing 500-day historical VaR with Kupiec's proportion-of-failures test; a p-value
