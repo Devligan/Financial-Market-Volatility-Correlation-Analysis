@@ -1,0 +1,32 @@
+# --- Secrets & local configuration ---
+.env
+.streamlit/secrets.toml
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Virtual environments ---
+.venv/
+venv/
+env/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+
+# --- IDE / OS ---
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# --- Logs ---
+*.log
+
+# Note: the committed artifacts — data/price_history.csv (offline snapshot) and the
+# generated files in reports/ (summary CSV/XLSX, correlations, weights, HTML report) —
+# are intentionally tracked so the dashboard works offline and results stay visible.

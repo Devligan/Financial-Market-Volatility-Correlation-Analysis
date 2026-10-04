@@ -1,0 +1,11 @@
+streamlit>=1.47
+yfinance>=0.2.65
+pandas>=2.3
+numpy>=2.3
+scipy>=1.15
+arch>=7.2
+plotly>=6.2
+matplotlib>=3.10
+seaborn>=0.13
+openpyxl>=3.1
+python-dotenv>=1.1
