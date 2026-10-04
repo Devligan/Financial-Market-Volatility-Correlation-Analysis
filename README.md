@@ -28,7 +28,7 @@ computes institutional-grade risk metrics, maps cross-asset correlations, valida
 portfolios out-of-sample, stress-tests them against crisis windows, models volatility with
 
 
-GARCH(1,1), and serves everything through a live, inteR2tive Streamlit dashboard.
+GARCH(1,1), and serves everything through a live, interactive Streamlit dashboard.
 
 
 
@@ -310,7 +310,7 @@ finrisk/                     # analytics package
 analysis.py                  # command-line entry point
 
 
-dashboard.py                 # inteR2tive Streamlit dashboard
+dashboard.py                 # interactive Streamlit dashboard
 
 
 study.py                     # console study runner (tables, charts, exports)
@@ -373,7 +373,7 @@ python analysis.py                # full pipeline incl. backtest & risk models (
 python analysis.py --fast         # skip the extended suite for a quick run
 
 
-streamlit run dashboard.py        # open the inteR2tive dashboard
+streamlit run dashboard.py        # open the interactive dashboard
 
 
 python study.py                   # console study with tables, charts and exports
