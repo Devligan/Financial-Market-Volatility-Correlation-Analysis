@@ -54,5 +54,5 @@ def main(argv: list[str] | None = None) -> int:
     for path in save_outputs(bundle, extended):
         print(f"wrote {path}")
 
-    print("\n".join(f"• {bullet.replace('**', '')}" for bullet in executive_summary(bundle, extended=extended)))
+    print("\n".join(f" {bullet.replace('**', '')}" for bullet in executive_summary(bundle, extended=extended)))
     return 0

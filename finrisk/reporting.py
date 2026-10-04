@@ -49,7 +49,7 @@ def executive_summary(bundle: AnalysisBundle, extended: ExtendedAnalysis | None 
     class_text = ", ".join(f"{count} {class_labels.get(klass, klass.lower())}" for klass, count in class_counts.items())
     bullets.append(
         f"Analyzed **{len(metrics)} assets** ({class_text}) over {len(bundle.returns)} trading days "
-        f"({bundle.prices.index[0].date()} → {bundle.prices.index[-1].date()}), "
+        f"({bundle.prices.index[0].date()}  {bundle.prices.index[-1].date()}), "
         f"using a {bundle.risk_free:.1%} risk-free rate."
     )
 
@@ -107,7 +107,7 @@ def executive_summary(bundle: AnalysisBundle, extended: ExtendedAnalysis | None 
     if {"STOCK", "COMMODITY"} <= set(classes.index):
         bullets.append(
             f"Average volatility: stocks {classes.loc['STOCK', 'Annualized_Volatility']:.1%} vs "
-            f"commodities {classes.loc['COMMODITY', 'Annualized_Volatility']:.1%} — commodities and equities "
+            f"commodities {classes.loc['COMMODITY', 'Annualized_Volatility']:.1%}  commodities and equities "
             f"provide different risk exposures for diversification."
         )
 
@@ -117,12 +117,12 @@ def executive_summary(bundle: AnalysisBundle, extended: ExtendedAnalysis | None 
     bullets.append(
         f"**Max-Sharpe portfolio optimization** ({top_weights(bundle.max_sharpe, 4)}): achieves "
         f"{sharpe_stats['Annualized_Return']:.1%} return at {sharpe_stats['Annualized_Volatility']:.1%} volatility "
-        f"(Sharpe {sharpe_stats['Sharpe_Ratio']:.2f}) — outperforming equal-weight (Sharpe {equal_stats['Sharpe_Ratio']:.2f}) "
+        f"(Sharpe {sharpe_stats['Sharpe_Ratio']:.2f})  outperforming equal-weight (Sharpe {equal_stats['Sharpe_Ratio']:.2f}) "
         f"and best single asset (Sharpe {metrics['Sharpe_Ratio'].max():.2f}) with improved risk-adjusted efficiency."
     )
     bullets.append(
         f"**Minimum-variance portfolio** ({top_weights(bundle.min_variance, 4)}): delivers "
-        f"{minvar_stats['Annualized_Volatility']:.1%} volatility with {minvar_stats['Max_Drawdown']:.1%} max drawdown — "
+        f"{minvar_stats['Annualized_Volatility']:.1%} volatility with {minvar_stats['Max_Drawdown']:.1%} max drawdown  "
         f"offering a defensive, low-risk allocation for risk-averse mandates vs {sharpe_stats['Annualized_Volatility']:.1%} "
         f"volatility for the tangency portfolio."
     )
@@ -215,8 +215,8 @@ def report_html(bundle: AnalysisBundle, extended: ExtendedAnalysis | None = None
 </head>
 <body>
   <h1>Financial Volatility &amp; Correlation Analysis</h1>
-  <p class="meta">Generated {bundle.fetched_at:%Y-%m-%d %H:%M:%S} · {len(bundle.metrics)} assets ·
-  {len(bundle.returns)} trading days · data source: {source_text}</p>
+  <p class="meta">Generated {bundle.fetched_at:%Y-%m-%d %H:%M:%S}  {len(bundle.metrics)} assets 
+  {len(bundle.returns)} trading days  data source: {source_text}</p>
 
   <h2>Executive Summary</h2>
   <ul>

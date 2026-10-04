@@ -140,7 +140,7 @@ def run_study(
     print("Financial Volatility & Correlation Study")
     print(
         f"   Assets: {prices.shape[1]} | trading days: {len(prices)} | "
-        f"range: {prices.index[0].date()} → {prices.index[-1].date()} | source: {source}"
+        f"range: {prices.index[0].date()}  {prices.index[-1].date()} | source: {source}"
     )
 
     bundle = an.compute_all(
@@ -202,7 +202,7 @@ def run_study(
 
     print("\nExecutive summary:")
     for bullet in an.executive_summary(bundle, extended=extended):
-        print("   •", bullet.replace("**", ""))
+        print("   ", bullet.replace("**", ""))
 
     # Show every figure in a single blocking call, after all text output is done.
     backend = plt.get_backend().lower()

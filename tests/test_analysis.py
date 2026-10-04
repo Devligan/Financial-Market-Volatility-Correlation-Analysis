@@ -1,6 +1,6 @@
 """Offline unit tests for the ``finrisk`` analytics engine.
 
-Everything runs on deterministic synthetic data — no network access required.
+Everything runs on deterministic synthetic data  no network access required.
 
 Run from the project root:
 

@@ -44,7 +44,7 @@ from finrisk import presentation as pres
 
 
 
-st.set_page_config(page_title="Financial Volatility & Correlation Analysis", page_icon="📈", layout="wide")
+st.set_page_config(page_title="Financial Volatility & Correlation Analysis", page_icon="", layout="wide")
 
 
 
@@ -104,7 +104,7 @@ class Controls:
 
 # ---------------------------------------------------------------------------
 
-@st.cache_data(ttl=1800, show_spinner="Downloading market data from Yahoo Finance…")
+@st.cache_data(ttl=1800, show_spinner="Downloading market data from Yahoo Finance")
 
 def load_prices(start: dt.date, end: dt.date, tickers: tuple[str, ...]):
 
@@ -152,7 +152,7 @@ def load_prices(start: dt.date, end: dt.date, tickers: tuple[str, ...]):
 
 
 
-@st.cache_data(show_spinner="Running risk analytics…")
+@st.cache_data(show_spinner="Running risk analytics")
 
 def analyze(prices: pd.DataFrame, rf: float, benchmark: str | None, mc_portfolios: int) -> an.AnalysisBundle:
 
@@ -238,7 +238,7 @@ def class_color(ticker: str) -> str:
 
 def clean_label(ticker: str) -> str:
 
-    return f"{ticker} · {an.asset_name(ticker)}" if ticker in an.ASSET_UNIVERSE else ticker
+    return f"{ticker}  {an.asset_name(ticker)}" if ticker in an.ASSET_UNIVERSE else ticker
 
 
 
@@ -424,7 +424,7 @@ def render_data_status(
 
         if source == "live":
 
-            st.success(f"Live data · cached 30 min · fetched {bundle.fetched_at:%H:%M}")
+            st.success(f"Live data  cached 30 min  fetched {bundle.fetched_at:%H:%M}")
 
         else:
 
@@ -436,9 +436,9 @@ def render_data_status(
 
         st.caption(
 
-            f"{len(available)} assets · {len(bundle.returns)} trading days · "
+            f"{len(available)} assets  {len(bundle.returns)} trading days  "
 
-            f"{prices.index[0].date()} → {prices.index[-1].date()}"
+            f"{prices.index[0].date()}  {prices.index[-1].date()}"
 
         )
 
@@ -468,7 +468,7 @@ def render_metric_cards(bundle: an.AnalysisBundle, metrics: pd.DataFrame, n_asse
 
         "Avg Correlation",
 
-        "All Assets" if n_assets > 1 else "—",
+        "All Assets" if n_assets > 1 else "",
 
         f"{avg_corr:.3f}" if not np.isnan(avg_corr) else "n/a",
 
@@ -482,7 +482,7 @@ def render_metric_cards(bundle: an.AnalysisBundle, metrics: pd.DataFrame, n_asse
 
 # ---------------------------------------------------------------------------
 
-# Tab 1 — Overview
+# Tab 1  Overview
 
 # ---------------------------------------------------------------------------
 
@@ -510,7 +510,7 @@ def render_overview(metrics: pd.DataFrame) -> None:
 
             customdata=[an.asset_class(t) for t in vol_data.index],
 
-            hovertemplate="%{y} · %{customdata}<br>Annualized volatility: %{x:.2%}<extra></extra>",
+            hovertemplate="%{y}  %{customdata}<br>Annualized volatility: %{x:.2%}<extra></extra>",
 
         )
 
@@ -594,7 +594,7 @@ def render_overview(metrics: pd.DataFrame) -> None:
 
 
 
-    st.caption("Colors — blue: stocks · purple: ETFs · green: bonds · orange: commodities · teal: currencies")
+    st.caption("Colors  blue: stocks  purple: ETFs  green: bonds  orange: commodities  teal: currencies")
 
     with st.expander("Average risk profile by asset class"):
 
@@ -606,7 +606,7 @@ def render_overview(metrics: pd.DataFrame) -> None:
 
 # ---------------------------------------------------------------------------
 
-# Tab 2 — Risk & Return
+# Tab 2  Risk & Return
 
 # ---------------------------------------------------------------------------
 
@@ -656,7 +656,7 @@ def render_risk_and_return(bundle: an.AnalysisBundle) -> None:
 
     st.info(
 
-        "**Top-left**: low risk, positive return (ideal) · **bottom-left**: low risk, negative return · "
+        "**Top-left**: low risk, positive return (ideal)  **bottom-left**: low risk, negative return  "
 
         "**right**: high risk. Marker color encodes the Sharpe ratio."
 
@@ -710,7 +710,7 @@ def render_risk_and_return(bundle: an.AnalysisBundle) -> None:
 
             textfont={"size": 9},
 
-            hovertemplate="%{y} · %{x}: %{z:.2%}<extra></extra>",
+            hovertemplate="%{y}  %{x}: %{z:.2%}<extra></extra>",
 
         )
 
@@ -728,7 +728,7 @@ def render_risk_and_return(bundle: an.AnalysisBundle) -> None:
 
 # ---------------------------------------------------------------------------
 
-# Tab 3 — Correlations
+# Tab 3  Correlations
 
 # ---------------------------------------------------------------------------
 
@@ -788,9 +788,9 @@ def render_correlations(bundle: an.AnalysisBundle, available: list[str]) -> None
 
     col1, col2 = st.columns(2)
 
-    col1.success(f"Highest: **{hi_a} ↔ {hi_b}** ({hi_val:.2f})")
+    col1.success(f"Highest: **{hi_a}  {hi_b}** ({hi_val:.2f})")
 
-    col2.info(f"Lowest: **{lo_a} ↔ {lo_b}** ({lo_val:.2f})")
+    col2.info(f"Lowest: **{lo_a}  {lo_b}** ({lo_val:.2f})")
 
 
 
@@ -850,7 +850,7 @@ def render_correlations(bundle: an.AnalysisBundle, available: list[str]) -> None
 
     fig.update_layout(
 
-        title=f"{window}-day rolling correlation — {asset_a} vs {asset_b}",
+        title=f"{window}-day rolling correlation  {asset_a} vs {asset_b}",
 
         yaxis_range=[-1.05, 1.05],
 
@@ -882,7 +882,7 @@ def render_correlations(bundle: an.AnalysisBundle, available: list[str]) -> None
 
 # ---------------------------------------------------------------------------
 
-# Tab 4 — Portfolio Optimizer
+# Tab 4  Portfolio Optimizer
 
 # ---------------------------------------------------------------------------
 
@@ -922,7 +922,7 @@ def render_portfolio_optimizer(bundle: an.AnalysisBundle, available: list[str]) 
 
     )
 
-    fig.update_traces(marker={"size": 6}, hovertemplate="vol %{x:.2%} · return %{y:.2%}<extra></extra>")
+    fig.update_traces(marker={"size": 6}, hovertemplate="vol %{x:.2%}  return %{y:.2%}<extra></extra>")
 
     if not bundle.frontier.empty:
 
@@ -1098,7 +1098,7 @@ def render_portfolio_optimizer(bundle: an.AnalysisBundle, available: list[str]) 
 
         r2.metric("Concentration (HHI)", f"{profile['Concentration_HHI']:.2f}")
 
-        r3.metric("Top risk asset", f"{profile['Top_Risk_Asset']} · {profile['Top_Risk_Percent']:.0%}")
+        r3.metric("Top risk asset", f"{profile['Top_Risk_Asset']}  {profile['Top_Risk_Percent']:.0%}")
 
         risk_frame = an.risk_contributions(bundle.returns, chosen_weights)
 
@@ -1180,7 +1180,7 @@ def render_portfolio_optimizer(bundle: an.AnalysisBundle, available: list[str]) 
 
 # ---------------------------------------------------------------------------
 
-# Tab 5 — Drawdown & Tail Risk
+# Tab 5  Drawdown & Tail Risk
 
 # ---------------------------------------------------------------------------
 
@@ -1240,7 +1240,7 @@ def render_drawdown_and_tail_risk(bundle: an.AnalysisBundle, metrics: pd.DataFra
 
     )
 
-    fig.update_layout(title=f"Underwater plot — {subject}", yaxis_title="Drawdown", height=380)
+    fig.update_layout(title=f"Underwater plot  {subject}", yaxis_title="Drawdown", height=380)
 
     fig.update_yaxes(tickformat=".0%")
 
@@ -1254,13 +1254,13 @@ def render_drawdown_and_tail_risk(bundle: an.AnalysisBundle, metrics: pd.DataFra
 
     for column in ("Peak", "Trough", "Recovery"):
 
-        episodes[column] = episodes[column].dt.strftime("%Y-%m-%d").fillna("—")
+        episodes[column] = episodes[column].dt.strftime("%Y-%m-%d").fillna("")
 
     episodes["Depth"] = episodes["Depth"].map(lambda value: f"{value:.1%}")
 
     episodes["Trough_Days"] = episodes["Trough_Days"].map("{:.0f}".format)
 
-    episodes["Recovery_Days"] = episodes["Recovery_Days"].map(lambda value: "—" if pd.isna(value) else f"{value:.0f}")
+    episodes["Recovery_Days"] = episodes["Recovery_Days"].map(lambda value: "" if pd.isna(value) else f"{value:.0f}")
 
     st.dataframe(episodes, use_container_width=True, hide_index=True)
 
@@ -1324,11 +1324,11 @@ def render_drawdown_and_tail_risk(bundle: an.AnalysisBundle, metrics: pd.DataFra
 
         cvar95 = -subject_series[subject_series <= subject_series.quantile(0.05)].mean()
 
-        fig.add_vline(x=-var95, line_dash="dash", line_color="red", annotation_text=f"VaR 95% · {var95:.2%}")
+        fig.add_vline(x=-var95, line_dash="dash", line_color="red", annotation_text=f"VaR 95%  {var95:.2%}")
 
-        fig.add_vline(x=-cvar95, line_dash="dot", line_color="darkred", annotation_text=f"CVaR 95% · {cvar95:.2%}")
+        fig.add_vline(x=-cvar95, line_dash="dot", line_color="darkred", annotation_text=f"CVaR 95%  {cvar95:.2%}")
 
-        fig.update_layout(title=f"Daily return distribution — {subject}", xaxis_title="Daily return", height=420)
+        fig.update_layout(title=f"Daily return distribution  {subject}", xaxis_title="Daily return", height=420)
 
         fig.update_xaxes(tickformat=".1%")
 
@@ -1362,7 +1362,7 @@ def render_drawdown_and_tail_risk(bundle: an.AnalysisBundle, metrics: pd.DataFra
 
     scenario_text = [
 
-        [f"{value:.0%}" if pd.notna(value) else "—" for value in scenario_returns.loc[name]]
+        [f"{value:.0%}" if pd.notna(value) else "" for value in scenario_returns.loc[name]]
 
         for name in scenario_returns.index
 
@@ -1400,7 +1400,7 @@ def render_drawdown_and_tail_risk(bundle: an.AnalysisBundle, metrics: pd.DataFra
 
         st.dataframe(
 
-            scenario_drawdowns.map(lambda value: f"{value:.1%}" if pd.notna(value) else "—"),
+            scenario_drawdowns.map(lambda value: f"{value:.1%}" if pd.notna(value) else ""),
 
             use_container_width=True,
 
@@ -1418,7 +1418,7 @@ def render_drawdown_and_tail_risk(bundle: an.AnalysisBundle, metrics: pd.DataFra
 
 # ---------------------------------------------------------------------------
 
-# Tab 6 — Executive Summary
+# Tab 6  Executive Summary
 
 # ---------------------------------------------------------------------------
 
@@ -1460,9 +1460,9 @@ def render_executive_summary(bundle: an.AnalysisBundle, metrics: pd.DataFrame, r
 
         st.caption(
 
-            f"CAGR {sharpe_stats['Annualized_Return']:.1%} · vol {sharpe_stats['Annualized_Volatility']:.1%} · "
+            f"CAGR {sharpe_stats['Annualized_Return']:.1%}  vol {sharpe_stats['Annualized_Volatility']:.1%}  "
 
-            f"Sharpe {sharpe_stats['Sharpe_Ratio']:.2f} · max drawdown {sharpe_stats['Max_Drawdown']:.1%}"
+            f"Sharpe {sharpe_stats['Sharpe_Ratio']:.2f}  max drawdown {sharpe_stats['Max_Drawdown']:.1%}"
 
         )
 
@@ -1486,9 +1486,9 @@ def render_executive_summary(bundle: an.AnalysisBundle, metrics: pd.DataFrame, r
 
         st.caption(
 
-            f"CAGR {minvar_stats['Annualized_Return']:.1%} · vol {minvar_stats['Annualized_Volatility']:.1%} · "
+            f"CAGR {minvar_stats['Annualized_Return']:.1%}  vol {minvar_stats['Annualized_Volatility']:.1%}  "
 
-            f"Sharpe {minvar_stats['Sharpe_Ratio']:.2f} · max drawdown {minvar_stats['Max_Drawdown']:.1%}"
+            f"Sharpe {minvar_stats['Sharpe_Ratio']:.2f}  max drawdown {minvar_stats['Max_Drawdown']:.1%}"
 
         )
 
@@ -1574,55 +1574,55 @@ def render_executive_summary(bundle: an.AnalysisBundle, metrics: pd.DataFrame, r
 
         st.markdown(f"""
 
-**Returns** — daily simple returns from adjusted close prices; annualized over {an.TRADING_DAYS} trading days.
+**Returns**  daily simple returns from adjusted close prices; annualized over {an.TRADING_DAYS} trading days.
 
 
 
-**Annualized return** — geometric CAGR: `(1+r).prod() ** (252/n) - 1`.
+**Annualized return**  geometric CAGR: `(1+r).prod() ** (252/n) - 1`.
 
 
 
-**Sharpe ratio** — `(annualized arithmetic return − risk-free rate) / annualized volatility`
+**Sharpe ratio**  `(annualized arithmetic return  risk-free rate) / annualized volatility`
 
 with a risk-free rate of **{risk_free:.1%}**.
 
 
 
-**Sortino ratio** — excess return divided by downside deviation (returns below the risk-free rate).
+**Sortino ratio**  excess return divided by downside deviation (returns below the risk-free rate).
 
 
 
-**Max drawdown / Calmar** — deepest peak-to-trough decline of the cumulative wealth curve;
+**Max drawdown / Calmar**  deepest peak-to-trough decline of the cumulative wealth curve;
 
 Calmar = CAGR / |max drawdown|.
 
 
 
-**VaR / CVaR (95%, 99%)** — historical simulation: the daily loss at the 5%/1% quantile, and the
+**VaR / CVaR (95%, 99%)**  historical simulation: the daily loss at the 5%/1% quantile, and the
 
 average loss beyond it. Reported as positive loss magnitudes.
 
 
 
-**Beta / Alpha** — CAPM regression against **{bundle.benchmark or "the selected benchmark"}**;
+**Beta / Alpha**  CAPM regression against **{bundle.benchmark or "the selected benchmark"}**;
 
 alpha is annualized Jensen's alpha.
 
 
 
-**Tracking error / information ratio** — annualized volatility of active returns (asset − benchmark),
+**Tracking error / information ratio**  annualized volatility of active returns (asset  benchmark),
 
 and annualized active return divided by tracking error.
 
 
 
-**Up / down capture** — average monthly return in the months the benchmark rose (fell),
+**Up / down capture**  average monthly return in the months the benchmark rose (fell),
 
 relative to the benchmark's own average over those months.
 
 
 
-**Portfolio optimization** — long-only mean-variance optimization (SLSQP): maximum Sharpe
+**Portfolio optimization**  long-only mean-variance optimization (SLSQP): maximum Sharpe
 
 (tangency portfolio), global minimum variance, and a Markowitz efficient frontier with
 
@@ -1636,7 +1636,7 @@ Monte Carlo sampling of the weight simplex.
 
 # ---------------------------------------------------------------------------
 
-# Tab 5 — Backtest
+# Tab 5  Backtest
 
 # ---------------------------------------------------------------------------
 
@@ -1666,7 +1666,7 @@ def render_backtest(controls: Controls, benchmark: str | None) -> None:
 
     try:
 
-        with st.spinner("Running walk-forward backtest…"):
+        with st.spinner("Running walk-forward backtest"):
 
             result = cached_backtest(
 
@@ -1732,7 +1732,7 @@ def render_backtest(controls: Controls, benchmark: str | None) -> None:
 
     st.caption(
 
-        f"Estimation window: {result.lookback} trading days · {result.cost_bps:.0f} bp one-way cost per rebalance · "
+        f"Estimation window: {result.lookback} trading days  {result.cost_bps:.0f} bp one-way cost per rebalance  "
 
         "turnover and cost columns are averages over the backtest."
 
@@ -1744,7 +1744,7 @@ def render_backtest(controls: Controls, benchmark: str | None) -> None:
 
 # ---------------------------------------------------------------------------
 
-# Tab 7 — Risk Models
+# Tab 7  Risk Models
 
 # ---------------------------------------------------------------------------
 
@@ -1766,11 +1766,11 @@ def render_risk_models(bundle: an.AnalysisBundle, controls: Controls) -> None:
 
     for column in ("Breach_Rate", "Expected_Rate", "Avg_Breach_Loss"):
 
-        var_display[column] = var_display[column].map(lambda value: f"{value:.1%}" if pd.notna(value) else "—")
+        var_display[column] = var_display[column].map(lambda value: f"{value:.1%}" if pd.notna(value) else "")
 
     for column in ("LR_Statistic", "P_Value"):
 
-        var_display[column] = var_display[column].map(lambda value: f"{value:.3f}" if pd.notna(value) else "—")
+        var_display[column] = var_display[column].map(lambda value: f"{value:.3f}" if pd.notna(value) else "")
 
     st.dataframe(var_display, use_container_width=True, hide_index=True)
 
@@ -1822,7 +1822,7 @@ def render_risk_models(bundle: an.AnalysisBundle, controls: Controls) -> None:
 
     )
 
-    fig.update_layout(height=420, title=f"Returns vs VaR — {subject}", yaxis_title="Daily return")
+    fig.update_layout(height=420, title=f"Returns vs VaR  {subject}", yaxis_title="Daily return")
 
     st.plotly_chart(fig, use_container_width=True)
 
@@ -1850,7 +1850,7 @@ def render_risk_models(bundle: an.AnalysisBundle, controls: Controls) -> None:
 
         return
 
-    with st.spinner("Fitting GARCH(1,1) models…"):
+    with st.spinner("Fitting GARCH(1,1) models"):
 
         forecast = cached_garch(tuple(controls.tickers), controls.start_date, controls.end_date)
 
@@ -1860,13 +1860,13 @@ def render_risk_models(bundle: an.AnalysisBundle, controls: Controls) -> None:
 
         forecast_display[column] = forecast_display[column].map(
 
-            lambda value: f"{value:.1%}" if pd.notna(value) else "—"
+            lambda value: f"{value:.1%}" if pd.notna(value) else ""
 
         )
 
     forecast_display["Forecast_vs_Realized"] = forecast["Forecast_vs_Realized"].map(
 
-        lambda value: f"{value:.2f}" if pd.notna(value) else "—"
+        lambda value: f"{value:.2f}" if pd.notna(value) else ""
 
     )
 
@@ -1928,7 +1928,7 @@ def main() -> None:
 
     st.title("Financial Volatility & Correlation Analysis")
 
-    st.caption("Live market data · advanced risk metrics · mean-variance portfolio optimization")
+    st.caption("Live market data  advanced risk metrics  mean-variance portfolio optimization")
 
 
 
@@ -1954,7 +1954,7 @@ def main() -> None:
 
         st.error(
 
-            "Could not load market data — no live connection and no local snapshot found.\n\n"
+            "Could not load market data  no live connection and no local snapshot found.\n\n"
 
             "Run `python analysis.py` while online to create `data/price_history.csv`, then reload."
 
@@ -2058,7 +2058,7 @@ def main() -> None:
 
     st.caption(
 
-        f"Data: Yahoo Finance via yfinance · source: {source} · analytics recomputed per selection · "
+        f"Data: Yahoo Finance via yfinance  source: {source}  analytics recomputed per selection  "
 
         f"benchmark: {bundle.benchmark or 'n/a'}"
 

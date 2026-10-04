@@ -1,6 +1,6 @@
 """Shared display layer for the dashboard, notebook and console study.
 
-Presentation only — the analytics live in the ``finrisk`` engine modules; keeping
+Presentation only  the analytics live in the ``finrisk`` engine modules; keeping
 the two separate stops display concerns from leaking into the engine.
 """
 
@@ -80,4 +80,4 @@ def metric_style(df: pd.DataFrame):
             formats[column] = "{:,.0f}"
         else:
             formats[column] = "{:,.4f}"
-    return df.style.format(formats, na_rep="—")
+    return df.style.format(formats, na_rep="")

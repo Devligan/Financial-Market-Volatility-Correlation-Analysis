@@ -2,7 +2,7 @@
 
 The package mirrors the analysis pipeline:
 
-    config ── universe ── data ── metrics ── portfolio ── pipeline ── reporting
+    config  universe  data  metrics  portfolio  pipeline  reporting
 
 Everything public is re-exported here, so the whole system is available under a
 single import:

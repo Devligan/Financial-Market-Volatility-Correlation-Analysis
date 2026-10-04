@@ -188,7 +188,7 @@ def compute_metrics(
 
         # Up/down capture (Morningstar-style): the asset's average monthly return in the
         # months the benchmark rose (fell), divided by the benchmark's own average over
-        # those months. Averaging keeps both sides on the same scale — compounding raw
+        # those months. Averaging keeps both sides on the same scale  compounding raw
         # daily up days over a decade inflates the ratio into meaninglessness.
         monthly = (1 + returns).groupby(returns.index.to_period("M")).prod() - 1
         monthly_market = monthly[benchmark]
