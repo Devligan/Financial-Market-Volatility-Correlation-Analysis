@@ -22,7 +22,7 @@ An end-to-end quantitative risk system for a 113-asset cross-asset universe â�
 bonds, commodities and currencies â€” covering over a decade of market history (2010 onward). It
 
 
-computes institutional-gR²e risk metrics, maps cross-asset correlations, validates optimized
+computes institutional-grade risk metrics, maps cross-asset correlations, validates optimized
 
 
 portfolios out-of-sample, stress-tests them against crisis windows, models volatility with
